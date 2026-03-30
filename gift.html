@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:'Poppins';
+  background: linear-gradient(135deg,#ff758c,#ff7eb3,#ffd3a5);
+  color:white;
+}
+
+/* CENTER TEXT */
+.center{
+  position:absolute;
+  top:25%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+}
+
+h1{
+  font-family:'Dancing Script';
+  font-size:2.5em;
+}
+
+.glow{
+  color:#fff;
+  text-shadow:0 0 10px #ff4d6d,0 0 20px #ff4d6d;
+}
+
+/* PHOTO CARD */
+.photo-box{
+  position:absolute;
+  top:60%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:260px;
+  background:white;
+  border-radius:15px;
+  padding:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.4);
+  text-align:center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.photo-box img{
+  width:100%;
+  border-radius:10px;
+}
+
+#caption{
+  margin-top:8px;
+  color:#ff4d6d;
+  font-size:14px;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float{
+  0%,100%{ transform:translate(-50%,-50%); }
+  50%{ transform:translate(-50%,-55%); }
+}
+
+/* HEARTS & PAWS */
+.heart,.paw{
+  position:fixed;
+  bottom:-20px;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp{
+  to{ transform:translateY(-100vh); opacity:0; }
+}
+
+/* FINAL BUTTON */
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:white;
+  font-size:18px;
+  margin:10px;
+}
+</style>
+</head>
+
+<body onclick="startExperience()">
+
+<div class="center">
+  <h1>For <span class="glow">HER_NAME ❤️</span></h1>
+  <div id="letter"></div>
+
+  <div id="final" style="display:none;">
+    <h2>Will you stay with me forever? 💍</h2>
+    <button onclick="yes()">YES ❤️</button>
+    <button onclick="yes()">FOREVER 💖</button>
+  </div>
+</div>
+
+<!-- PHOTO SLIDER -->
+<div class="photo-box">
+  <img id="slider" src="images/pic1.jpg">
+  <p id="caption">Our first beautiful memory 💖</p>
+</div>
+
+<audio id="music" src="music.mp3"></audio>
+<audio id="voice" src="voice.mp3"></audio>
+
+<script>
+let started=false;
+
+function startExperience(){
+  if(started) return;
+  started=true;
+
+  document.getElementById("music").play();
+  document.getElementById("voice").play();
+}
+
+/* PHOTO SLIDER */
+const images = [
+  "images/pic1.jpg",
+  "images/pic2.jpg",
+  "images/pic3.jpg",
+  "images/pic4.jpg",
+  "images/pic5.jpg",
+  "images/pic6.jpg"
+];
+
+const captions = [
+  "Our first beautiful memory 💖",
+  "Your smile = my happiness 😊",
+  "My favorite person ❤️",
+  "Every moment with you is special ✨",
+  "You make my world better 🌍💖",
+  "Forever with you 🥺❤️"
+];
+
+let index = 0;
+
+setInterval(()=>{
+  index = (index + 1) % images.length;
+  document.getElementById("slider").src = images[index];
+  document.getElementById("caption").innerText = captions[index];
+}, 3000);
+
+/* HEARTS */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerText="❤️";
+  h.style.left=Math.random()*100+"%";
+  h.style.animationDuration=(4+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},400);
+
+/* PAWS */
+setInterval(()=>{
+  let p=document.createElement("div");
+  p.className="paw";
+  p.innerText="🐾";
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=(5+Math.random()*3)+"s";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),8000);
+},1200);
+
+/* LOVE LETTER */
+const text="HER_NAME... ❤️ You are my happiness, my peace, my everything. These 6 months with you are the most beautiful part of my life. I just want to stay with you forever 🥺💖";
+let j=0;
+
+function type(){
+  if(j<text.length){
+    document.getElementById("letter").innerHTML+=text.charAt(j);
+    j++;
+    setTimeout(type,40);
+  }else{
+    document.getElementById("final").style.display="block";
+  }
+}
+type();
+
+/* FINAL BUTTON */
+function yes(){
+  window.location.href="forever.html";
+}
+</script>
+
+</body>
+</html>
