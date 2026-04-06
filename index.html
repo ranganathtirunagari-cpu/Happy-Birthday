@@ -245,6 +245,12 @@ header.hero::before{
 
   const timerInterval = setInterval(countdown, 1000);
   countdown();
+function openGift() {
+  document.body.style.opacity = "0";
+  setTimeout(() => {
+    window.location.href = "gift.html";
+  }, 500);
+}
 </script>
 
 </body>
