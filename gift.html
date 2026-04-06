@@ -172,7 +172,9 @@ function type(){
     document.getElementById("final").style.display="block";
   }
 }
-type();
+window.onload = () => {
+  type();
+};
 
 /* 6 PHOTO SLIDER WITH FADE */
 const images=[
