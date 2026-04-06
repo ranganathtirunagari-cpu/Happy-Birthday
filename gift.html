@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
 
@@ -16,10 +16,10 @@ body{
   color:white;
 }
 
-/* CENTER TEXT */
+/* TEXT AREA */
 .center{
   position:absolute;
-  top:22%;
+  top:25%;
   left:50%;
   transform:translate(-50%,-50%);
   text-align:center;
@@ -31,20 +31,43 @@ h1{
   font-size:2.2em;
 }
 
-.glow{
-  text-shadow:0 0 10px #ff4d6d,0 0 20px #ff4d6d;
-}
-
 #letter{
   font-size:14px;
   margin-top:10px;
-  line-height:1.5;
 }
 
-/* PHOTO CARD */
+/* PROPOSAL */
+#final{
+  display:none;
+  margin-top:15px;
+  animation: fadeIn 1.5s ease-in;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* BUTTON */
+button{
+  padding:12px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:white;
+  margin:10px;
+  width:140px;
+  font-size:16px;
+}
+
+button:active{
+  transform:scale(0.9);
+}
+
+/* PHOTO */
 .photo-box{
   position:absolute;
-  top:65%;
+  top:70%;
   left:50%;
   transform:translate(-50%,-50%);
   width:85%;
@@ -54,50 +77,21 @@ h1{
   padding:10px;
   box-shadow:0 5px 20px rgba(0,0,0,0.4);
   text-align:center;
-  animation: float 3s ease-in-out infinite;
 }
 
 .photo-box img{
   width:100%;
   border-radius:10px;
+  transition: opacity 0.5s ease-in-out;
 }
 
 #caption{
-  margin-top:8px;
   color:#ff4d6d;
   font-size:13px;
+  margin-top:5px;
 }
 
-/* FLOAT ANIMATION */
-@keyframes float{
-  0%,100%{ transform:translate(-50%,-50%); }
-  50%{ transform:translate(-50%,-53%); }
-}
-
-/* HEARTS & PAWS */
-.heart,.paw{
-  position:fixed;
-  bottom:-20px;
-  font-size:18px;
-  animation: floatUp linear forwards;
-}
-
-@keyframes floatUp{
-  to{ transform:translateY(-100vh); opacity:0; }
-}
-
-/* FINAL BUTTON */
-button{
-  padding:12px 18px;
-  border:none;
-  border-radius:25px;
-  background:#ff4d6d;
-  color:white;
-  font-size:16px;
-  margin:8px;
-  width:140px;
-}
-  /* CONFETTI CANVAS */
+/* CONFETTI */
 #confettiCanvas{
   position:fixed;
   top:0;
@@ -105,151 +99,74 @@ button{
   width:100%;
   height:100%;
   pointer-events:none;
-  z-index:999;
 }
 
-/* LOVE TEXT EXPLOSION */
+/* LOVE TEXT */
 #loveExplosion{
   position:fixed;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
-  font-size:40px;
+  font-size:clamp(24px,8vw,40px);
   font-family:'Dancing Script';
-  color:#fff;
-  text-shadow:0 0 20px #ff4d6d,0 0 40px #ff4d6d;
   opacity:0;
-  z-index:1000;
+  text-shadow:0 0 20px #ff4d6d;
 }
 
-/* ANIMATION */
 .showLove{
-  animation: explode 1.5s ease forwards;
+  animation: boom 1.5s forwards;
 }
 
-@keyframes explode{
-  0%{ transform:translate(-50%,-50%) scale(0.3); opacity:0;}
-  50%{ transform:translate(-50%,-50%) scale(1.2); opacity:1;}
-  100%{ transform:translate(-50%,-50%) scale(1); opacity:1;}
-}
-
-/* MOBILE FIX */
-@media(max-width:480px){
-  h1{
-    font-size:1.9em;
-  }
-
-  #letter{
-    font-size:13px;
-  }
-
-  .photo-box{
-    top:70%;
-  }
+@keyframes boom{
+  50%{transform:translate(-50%,-50%) scale(1.2); opacity:1;}
+  100%{transform:translate(-50%,-50%) scale(1); opacity:1;}
 }
 </style>
 </head>
 
-<body onclick="startExperience()">
+<body onclick="startMusic()">
 
 <div class="center">
-  <h1>For <span class="glow">Hasiniiii ❤️</span></h1>
+  <h1>For Hasiniiii ❤️</h1>
+
   <div id="letter"></div>
 
- <div id="final" style="display:none;">
-  <h2 style="font-size:20px; line-height:1.5;">
-    Heyy my lil potatooo 🥺💖 <br>
-    I just have one question... <br><br>
-    Will you stay with me forever? 💍❤️
-  </h2>
+  <div id="final">
+    <h2 style="font-size:18px; line-height:1.5;">
+      Heyy my lil potatooo 🥺💖 <br>
+      I just have one question... <br><br>
+      Will you stay with me forever? 💍❤️
+    </h2>
 
-  <button onclick="yes()">YES ❤️</button>
-  <button onclick="yes()">FOREVER 💖</button>
-   <canvas id="confettiCanvas"></canvas>
-
-<div id="loveExplosion">
-  I LOVE YOU ❤️
-</div>
-</div>
+    <button onclick="yes()">YES ❤️</button>
+    <button onclick="yes()">FOREVER 💖</button>
+  </div>
 </div>
 
 <!-- PHOTO SLIDER -->
 <div class="photo-box">
   <img id="slider" src="images/pic1.jpg">
-  <p id="caption">Our first beautiful memory 💖</p>
+  <p id="caption">Month 1 💖 – Where it all started</p>
 </div>
 
+<canvas id="confettiCanvas"></canvas>
+<div id="loveExplosion">I LOVE YOU ❤️</div>
+
 <audio id="music" src="music.mp3"></audio>
-<audio id="voice" src="voice.mp3"></audio>
 
 <script>
-let started=false;
-
-function startExperience(){
-  if(started) return;
-  started=true;
-
+function startMusic(){
   document.getElementById("music").play();
-  document.getElementById("voice").play();
 }
 
-/* PHOTO SLIDER */
-const images = [
-  "images/pic1.jpg",
-  "images/pic2.jpg",
-  "images/pic3.jpg",
-  "images/pic4.jpg",
-  "images/pic5.jpg",
-  "images/pic6.jpg"
-];
-
-const captions = [
-  "Our first beautiful memory 💖",
-  "Your smile = my happiness 😊",
-  "My favorite person ❤️",
-  "Every moment with you is special ✨",
-  "You make my world better 🌍💖",
-  "Forever with you 🥺❤️"
-];
-
-let index = 0;
-
-setInterval(()=>{
-  index = (index + 1) % images.length;
-  document.getElementById("slider").src = images[index];
-  document.getElementById("caption").innerText = captions[index];
-}, 3000);
-
-/* HEARTS */
-setInterval(()=>{
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerText="❤️";
-  h.style.left=Math.random()*100+"%";
-  h.style.animationDuration=(4+Math.random()*3)+"s";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),7000);
-},500);
-
-/* PAWS */
-setInterval(()=>{
-  let p=document.createElement("div");
-  p.className="paw";
-  p.innerText="🐾";
-  p.style.left=Math.random()*100+"%";
-  p.style.animationDuration=(5+Math.random()*3)+"s";
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),8000);
-},1500);
-
-/* LOVE LETTER */
-const text="HER_NAME... ❤️ You are my happiness, my peace, my everything. These 6 months with you are the most beautiful part of my life. I just want to stay with you forever 🥺💖";
-let j=0;
+/* TYPE LETTER */
+const text="Hasiniiii... ❤️ You are my happiness, my peace, my everything. These 6 months with you are the most beautiful part of my life. I just want to stay with you forever 🥺💖";
+let i=0;
 
 function type(){
-  if(j<text.length){
-    document.getElementById("letter").innerHTML+=text.charAt(j);
-    j++;
+  if(i<text.length){
+    document.getElementById("letter").innerHTML+=text[i];
+    i++;
     setTimeout(type,35);
   }else{
     document.getElementById("final").style.display="block";
@@ -257,70 +174,82 @@ function type(){
 }
 type();
 
-/* FINAL BUTTON */
+/* 6 PHOTO SLIDER WITH FADE */
+const images=[
+ "images/pic1.jpg",
+ "images/pic2.jpg",
+ "images/pic3.jpg",
+ "images/pic4.jpg",
+ "images/pic5.jpg",
+ "images/pic6.jpg"
+];
+
+const captions=[
+ "Month 1 💖 – Where it all started",
+ "Month 2 😊 – Getting closer every day",
+ "Month 3 ❤️ – You became my happiness",
+ "Month 4 🥺 – So many beautiful memories",
+ "Month 5 💕 – Falling more for you",
+ "Month 6 💍 – Now I just want forever with you"
+];
+
+let index=0;
+
+setInterval(()=>{
+  const img=document.getElementById("slider");
+
+  img.style.opacity=0;
+
+  setTimeout(()=>{
+    index=(index+1)%images.length;
+    img.src=images[index];
+    document.getElementById("caption").innerText=captions[index];
+    img.style.opacity=1;
+  },300);
+
+},3000);
+
+/* YES BUTTON */
 function yes(){
   startConfetti();
-
-  let love = document.getElementById("loveExplosion");
-  love.classList.add("showLove");
-
- setTimeout(()=>{
-   love.innerText = "I love you forever ❤️🥺";
-}, 2000);
+  document.getElementById("loveExplosion").classList.add("showLove");
 }
-  const canvas = document.getElementById("confettiCanvas");
-const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+/* CONFETTI */
+const canvas=document.getElementById("confettiCanvas");
+const ctx=canvas.getContext("2d");
 
-let confetti = [];
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 
-function createConfetti(){
-  for(let i=0;i<150;i++){
+let confetti=[];
+
+function create(){
+  for(let i=0;i<80;i++){
     confetti.push({
-      x: Math.random()*canvas.width,
-      y: Math.random()*canvas.height - canvas.height,
-      r: Math.random()*6+2,
-      d: Math.random()*5+2,
-      color: `hsl(${Math.random()*360},100%,50%)`
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:4,
+      d:3
     });
   }
 }
 
-function drawConfetti(){
+function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-
   confetti.forEach(c=>{
     ctx.beginPath();
     ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
-    ctx.fillStyle=c.color;
     ctx.fill();
-  });
-
-  updateConfetti();
-}
-
-function updateConfetti(){
-  confetti.forEach(c=>{
-    c.y += c.d;
-    if(c.y > canvas.height){
-      c.y = -10;
-      c.x = Math.random()*canvas.width;
-    }
+    c.y+=c.d;
   });
 }
 
 function startConfetti(){
-  confetti = [];
-  createConfetti();
-
-  let interval = setInterval(drawConfetti, 20);
-
-  setTimeout(()=>{
-    clearInterval(interval);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-  },4000);
+  confetti=[];
+  create();
+  let t=setInterval(draw,20);
+  setTimeout(()=>clearInterval(t),4000);
 }
 </script>
 
