@@ -264,9 +264,9 @@ function yes(){
   let love = document.getElementById("loveExplosion");
   love.classList.add("showLove");
 
-  setTimeout(()=>{
-    alert("I love you forever ❤️🥺");
-  },2000);
+ setTimeout(()=>{
+   love.innerText = "I love you forever ❤️🥺";
+}, 2000);
 }
   const canvas = document.getElementById("confettiCanvas");
 const ctx = canvas.getContext("2d");
