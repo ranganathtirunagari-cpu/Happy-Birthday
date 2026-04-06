@@ -10,7 +10,7 @@
 <style>
 body{
   margin:0;
-  overflow:hidden;
+  overflow-x:hidden;
   font-family:'Poppins';
   background: linear-gradient(135deg,#ff758c,#ff7eb3,#ffd3a5);
   color:white;
@@ -19,29 +19,36 @@ body{
 /* CENTER TEXT */
 .center{
   position:absolute;
-  top:25%;
+  top:22%;
   left:50%;
   transform:translate(-50%,-50%);
   text-align:center;
+  width:90%;
 }
 
 h1{
   font-family:'Dancing Script';
-  font-size:2.5em;
+  font-size:2.2em;
 }
 
 .glow{
-  color:#fff;
   text-shadow:0 0 10px #ff4d6d,0 0 20px #ff4d6d;
+}
+
+#letter{
+  font-size:14px;
+  margin-top:10px;
+  line-height:1.5;
 }
 
 /* PHOTO CARD */
 .photo-box{
   position:absolute;
-  top:60%;
+  top:65%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:260px;
+  width:85%;
+  max-width:300px;
   background:white;
   border-radius:15px;
   padding:10px;
@@ -58,19 +65,20 @@ h1{
 #caption{
   margin-top:8px;
   color:#ff4d6d;
-  font-size:14px;
+  font-size:13px;
 }
 
 /* FLOAT ANIMATION */
 @keyframes float{
   0%,100%{ transform:translate(-50%,-50%); }
-  50%{ transform:translate(-50%,-55%); }
+  50%{ transform:translate(-50%,-53%); }
 }
 
 /* HEARTS & PAWS */
 .heart,.paw{
   position:fixed;
   bottom:-20px;
+  font-size:18px;
   animation: floatUp linear forwards;
 }
 
@@ -80,13 +88,29 @@ h1{
 
 /* FINAL BUTTON */
 button{
-  padding:12px 20px;
+  padding:12px 18px;
   border:none;
   border-radius:25px;
   background:#ff4d6d;
   color:white;
-  font-size:18px;
-  margin:10px;
+  font-size:16px;
+  margin:8px;
+  width:140px;
+}
+
+/* MOBILE FIX */
+@media(max-width:480px){
+  h1{
+    font-size:1.9em;
+  }
+
+  #letter{
+    font-size:13px;
+  }
+
+  .photo-box{
+    top:70%;
+  }
 }
 </style>
 </head>
@@ -98,7 +122,7 @@ button{
   <div id="letter"></div>
 
   <div id="final" style="display:none;">
-    <h2>Will you stay with me forever? 💍</h2>
+    <h2 style="font-size:18px;">Will you stay with me forever? 💍</h2>
     <button onclick="yes()">YES ❤️</button>
     <button onclick="yes()">FOREVER 💖</button>
   </div>
@@ -160,7 +184,7 @@ setInterval(()=>{
   h.style.animationDuration=(4+Math.random()*3)+"s";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),7000);
-},400);
+},500);
 
 /* PAWS */
 setInterval(()=>{
@@ -171,7 +195,7 @@ setInterval(()=>{
   p.style.animationDuration=(5+Math.random()*3)+"s";
   document.body.appendChild(p);
   setTimeout(()=>p.remove(),8000);
-},1200);
+},1500);
 
 /* LOVE LETTER */
 const text="HER_NAME... ❤️ You are my happiness, my peace, my everything. These 6 months with you are the most beautiful part of my life. I just want to stay with you forever 🥺💖";
@@ -181,7 +205,7 @@ function type(){
   if(j<text.length){
     document.getElementById("letter").innerHTML+=text.charAt(j);
     j++;
-    setTimeout(type,40);
+    setTimeout(type,35);
   }else{
     document.getElementById("final").style.display="block";
   }
