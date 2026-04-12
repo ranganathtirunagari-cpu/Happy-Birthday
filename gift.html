@@ -346,8 +346,8 @@ noBtn.onmouseover=noBtn.ontouchstart=()=>{
 
 /* SLIDER */
 const images=[
- // "images/first.jpg",
- // "images/bg.jpg",
+ "images/first.jpg",
+ "images/bg.jpg",
  "images/lake.jpg",
  "images/booth.jpg",
  "images/event.jpg",
@@ -359,7 +359,7 @@ const captions=[
  "😊 – Getting closer",
  "❤️ – travelling together", 
  "😘 – making memories",
- // "🌹 – being together",
+ "🌹 – being together",
  "😍 – my gorgeous"
 ];
 
@@ -369,23 +369,23 @@ function startSlider(){
   const img = document.getElementById("slider");
   const caption = document.getElementById("caption");
 
-  caption.innerText = captions[0];
+  let index = 0;
 
-  setInterval(() => {
-
-    img.style.transition = "opacity 0.6s ease-in-out";
+  function changeSlide() {
     img.style.opacity = 0;
 
     setTimeout(() => {
-      index = (index + 1) % images.length;
-
       img.src = images[index];
       caption.innerText = captions[index];
 
       img.style.opacity = 1;
-    }, 600);
 
-  }, 3500);
+      index = (index + 1) % images.length;
+    }, 500);
+  }
+
+  changeSlide(); // show first slide immediately
+  setInterval(changeSlide, 3500);
 }
 </script>
 
