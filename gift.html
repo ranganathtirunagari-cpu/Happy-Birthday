@@ -311,11 +311,16 @@ function typeProposal(){
   }
 }
 
-window.onload=type;
+window.onload = () => {
+  type();
+};
 
 /* YES */
 function yes(){
-  loveExplosion.classList.add("showLove");
+  const loveExplosion = document.getElementById("loveExplosion");
+loveExplosion.classList.remove("showLove");
+void loveExplosion.offsetWidth;
+loveExplosion.classList.add("showLove");
   photoBox.style.display="block";
   startSlider();
 
@@ -344,10 +349,10 @@ const images=[
 const captions=[
  "💖 – Where it all started",
  "😊 – Getting closer",
- "❤️ – travelling togeather", 
- "😘 - making memories",
- "🌹 - being togeather,
- "😍 - my gorgeous
+ "❤️ – travelling together", 
+ "😘 – making memories",
+ "🌹 – being together",
+ "😍 – my gorgeous"
 ];
 
 let index=0;
