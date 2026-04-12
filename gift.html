@@ -10,248 +10,362 @@
 <style>
 body{
   margin:0;
-  overflow-x:hidden;
   font-family:'Poppins';
-  background: linear-gradient(135deg,#ff758c,#ff7eb3,#ffd3a5);
+  color:white;
+  background: linear-gradient(to top, #a8edea, #fed6e3);
+  transition:0.8s;
+  overflow-x:hidden;
+}
+
+/* NIGHT MODE */
+body.night{
+  background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
+}
+
+/* 🌙 BUTTON TOP RIGHT */
+#nightBtn{
+  position:fixed;
+  top:10px;
+  right:10px;
+  z-index:1000;
+  padding:8px 12px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d6d;
   color:white;
 }
 
-/* TEXT AREA */
-.center{
-  position:absolute;
-  top:25%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  text-align:center;
-  width:90%;
+/* SKY */
+.sky{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-1;
 }
 
+.cloud{
+  position:absolute;
+  background:white;
+  border-radius:50px;
+}
+.cloud::before,.cloud::after{
+  content:'';
+  position:absolute;
+  background:white;
+  border-radius:50%;
+}
+.cloud::before{width:60px;height:60px;top:-30px;left:10px;}
+.cloud::after{width:80px;height:80px;top:-40px;right:10px;}
+
+.c1{width:120px;height:50px;top:20%;animation:moveCloud 25s linear infinite;}
+.c2{width:150px;height:60px;top:40%;animation:moveCloud 35s linear infinite;}
+.c3{width:100px;height:40px;top:60%;animation:moveCloud 30s linear infinite;}
+
+@keyframes moveCloud{
+  from{left:-200px;}
+  to{left:100%;}
+}
+
+/* NIGHT SKY */
+.night-sky{
+  position:fixed;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transition:0.8s;
+  z-index:-1;
+}
+body.night .night-sky{opacity:1;}
+
+.moon{
+  position:absolute;
+  top:60px;
+  right:30px;
+  width:60px;
+  height:60px;
+  background:white;
+  border-radius:50%;
+}
+
+.stars span{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:0.2;}
+  50%{opacity:1;}
+}
+
+/* CENTER */
+.center{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+  text-align:center;
+}
+
+/* TEXT */
 h1{
   font-family:'Dancing Script';
-  font-size:2.2em;
+  color:#ff4d6d;
 }
 
 #letter{
-  font-size:14px;
-  margin-top:10px;
+  font-family:'Dancing Script';
+  color: pink;
+  font-size:18px;
+  line-height:1.7;
+;
 }
 
-/* PROPOSAL */
-#final{
-  display:none;
-  margin-top:15px;
-  animation: fadeIn 1.5s ease-in;
+#proposalText{
+  font-family:'Dancing Script';
+  color: #ff4d6d;
+  font-size:22px;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* BUTTON */
+/* BUTTONS */
 button{
-  padding:12px;
+  padding:10px;
   border:none;
   border-radius:25px;
   background:#ff4d6d;
   color:white;
-  margin:10px;
-  width:140px;
-  font-size:16px;
-}
-
-button:active{
-  transform:scale(0.9);
+  margin:8px;
 }
 
 /* PHOTO */
-.photo-box{
-  position:absolute;
-  top:70%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:85%;
-  max-width:300px;
-  background:white;
-  border-radius:15px;
-  padding:10px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.4);
-  text-align:center;
+#photoBox{
+  display:none;
+  margin-top:15px;
+  width:90%;
+  max-width:280px;
 }
 
 .photo-box img{
   width:100%;
-  border-radius:10px;
-  transition: opacity 0.5s ease-in-out;
+  border-radius:15px;
+  transition:opacity 0.5s;
+  animation: zoomEffect 6s ease-in-out infinite alternate;
+}
+
+@keyframes zoomEffect{
+  0%{transform:scale(1);}
+  100%{transform:scale(1.1);}
 }
 
 #caption{
+  font-family:'Dancing Script';
   color:#ff4d6d;
-  font-size:13px;
   margin-top:5px;
 }
 
-/* CONFETTI */
-#confettiCanvas{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-}
-
 /* LOVE TEXT */
-#loveExplosion{
+/* #loveExplosion{
   position:fixed;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
-  font-size:clamp(24px,8vw,40px);
+  font-size:32px;
   font-family:'Dancing Script';
+  color:#ff2e63;
   opacity:0;
-  text-shadow:0 0 20px #ff4d6d;
-}
+} */
 
 .showLove{
-  animation: boom 1.5s forwards;
+  animation:boom 2s forwards;
 }
 
 @keyframes boom{
-  50%{transform:translate(-50%,-50%) scale(1.2); opacity:1;}
-  100%{transform:translate(-50%,-50%) scale(1); opacity:1;}
+  50%{transform:translate(-50%,-50%) scale(1.3);opacity:1;}
+  100%{transform:translate(-50%,-50%) scale(1);opacity:1;}
+}
+
+/* FINAL SURPRISE PERFECT CENTER */
+#finalSurprise{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:85%;
+  max-width:300px;
+
+  font-family:'Dancing Script';
+  font-size:20px;
+  text-align:center;
+
+  background:rgba(0,0,0,0.7);
+  padding:20px;
+  border-radius:20px;
+
+  opacity:0;
+}
+
+.showFinal{
+  animation:finalPop 1.5s forwards;
+}
+
+@keyframes finalPop{
+  0%{transform:translate(-50%,-50%) scale(0.3);opacity:0;}
+  100%{transform:translate(-50%,-50%) scale(1);opacity:1;}
 }
 </style>
 </head>
 
-<body onclick="startMusic()">
+<body>
+
+<button id="nightBtn" onclick="toggleNight()">🌙</button>
+
+<div class="sky">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+</div>
+
+<div class="night-sky">
+  <div class="moon"></div>
+  <div class="stars"></div>
+</div>
 
 <div class="center">
-  <h1>For Hasiniiii ❤️</h1>
 
-  <div id="letter"></div>
+<h1>For Hasiniiii ❤️</h1>
 
-  <div id="final">
-    <h2 style="font-size:18px; line-height:1.5;">
-      Heyy my lil potatooo 🥺💖 <br>
-      I just have one question... <br><br>
-      Will you stay with me forever? 💍❤️
-    </h2>
+<div id="letter"></div>
 
+<div id="final" style="display:none;">
+  <h2 id="proposalText"></h2>
+
+  <div id="buttons" style="display:none;">
     <button onclick="yes()">YES ❤️</button>
-    <button onclick="yes()">FOREVER 💖</button>
+    <button id="noBtn">NO 😢</button>
   </div>
 </div>
 
-<!-- PHOTO SLIDER -->
-<div class="photo-box">
+<div class="photo-box" id="photoBox">
   <img id="slider" src="images/pic1.jpg">
-  <p id="caption">Month 1 💖 – Where it all started</p>
+  <p id="caption"></p>
 </div>
 
-<canvas id="confettiCanvas"></canvas>
+</div>
+
 <div id="loveExplosion">I LOVE YOU ❤️</div>
 
-<audio id="music" src="music.mp3"></audio>
+<div id="finalSurprise">
+  💖 You said YES... <br><br>
+  Now you’re stuck with me forever 😏❤️ <br><br>
+  I promise to love you, irritate you, and make you smile every day 💕
+</div>
 
 <script>
-function startMusic(){
-  document.getElementById("music").play();
+function toggleNight(){
+  document.body.classList.toggle("night");
 }
 
-/* TYPE LETTER */
-const text="Hasiniiii... ❤️ You are my happiness, my peace, my everything. These 6 months with you are the most beautiful part of my life. I just want to stay with you forever 🥺💖";
-let i=0;
+/* STARS */
+const starsContainer=document.querySelector(".stars");
+for(let i=0;i<50;i++){
+  const s=document.createElement("span");
+  s.style.top=Math.random()*100+"vh";
+  s.style.left=Math.random()*100+"vw";
+  starsContainer.appendChild(s);
+}
 
+/* LETTER */
+const text="Hasiniiii... ❤️ You are my happiness, my peace, my everything. These 6 months with you are the most beautiful part of my life. I just want to stay with you forever,and want to irritate you and you might see a bad boy in me sometimes the way i behave like a clingy person sorry for that  🥺💖";
+
+let i=0;
 function type(){
   if(i<text.length){
-    document.getElementById("letter").innerHTML+=text[i];
-    i++;
-    setTimeout(type,35);
+    letter.textContent+=text[i++];
+    setTimeout(type,30);
   }else{
-    document.getElementById("final").style.display="block";
+    final.style.display="block";
+    typeProposal();
   }
 }
-window.onload = () => {
-  type();
+
+/* PROPOSAL */
+const proposal="Heyy my lil potatooo 🥺💖\nI just have one question...\n\nWill you stay with me forever? 💍❤️";
+let j=0;
+
+function typeProposal(){
+  if(j<proposal.length){
+    let char=proposal[j];
+    if(char === "\n"){
+      proposalText.innerHTML+="<br>";
+    }else{
+      proposalText.innerHTML+=char;
+    }
+    j++;
+    setTimeout(typeProposal,40);
+  }else{
+    buttons.style.display="block";
+  }
+}
+
+window.onload=type;
+
+/* YES */
+function yes(){
+  loveExplosion.classList.add("showLove");
+  photoBox.style.display="block";
+  startSlider();
+
+  setTimeout(()=>{
+    finalSurprise.classList.add("showFinal");
+  },4000);
+}
+
+/* NO BUTTON */
+noBtn.onmouseover=noBtn.ontouchstart=()=>{
+  noBtn.style.position="fixed";
+  noBtn.style.left=Math.random()*80+"vw";
+  noBtn.style.top=Math.random()*80+"vh";
 };
 
-/* 6 PHOTO SLIDER WITH FADE */
+/* SLIDER */
 const images=[
  "images/pic1.jpg",
  "images/pic2.jpg",
  "images/pic3.jpg",
- "images/pic4.jpg",
- "images/pic5.jpg",
- "images/pic6.jpg"
+  "images/pic3.jpg"
 ];
 
 const captions=[
- "Month 1 💖 – Where it all started",
- "Month 2 😊 – Getting closer every day",
- "Month 3 ❤️ – You became my happiness",
- "Month 4 🥺 – So many beautiful memories",
- "Month 5 💕 – Falling more for you",
- "Month 6 💍 – Now I just want forever with you"
+ "💖 – Where it all started",
+ "😊 – Getting closer",
+ "❤️ – My happiness",
+ "😘 - making memories",
+  
 ];
 
 let index=0;
 
-setInterval(()=>{
+function startSlider(){
   const img=document.getElementById("slider");
+  const caption=document.getElementById("caption");
 
-  img.style.opacity=0;
+  caption.innerText=captions[0];
 
-  setTimeout(()=>{
-    index=(index+1)%images.length;
-    img.src=images[index];
-    document.getElementById("caption").innerText=captions[index];
-    img.style.opacity=1;
-  },300);
+  setInterval(()=>{
+    img.style.opacity=0;
 
-},3000);
+    setTimeout(()=>{
+      index=(index+1)%images.length;
+      img.src=images[index];
+      caption.innerText=captions[index];
+      img.style.opacity=1;
+    },400);
 
-/* YES BUTTON */
-function yes(){
-  startConfetti();
-  document.getElementById("loveExplosion").classList.add("showLove");
-}
-
-/* CONFETTI */
-const canvas=document.getElementById("confettiCanvas");
-const ctx=canvas.getContext("2d");
-
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let confetti=[];
-
-function create(){
-  for(let i=0;i<80;i++){
-    confetti.push({
-      x:Math.random()*canvas.width,
-      y:Math.random()*canvas.height,
-      r:4,
-      d:3
-    });
-  }
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  confetti.forEach(c=>{
-    ctx.beginPath();
-    ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
-    ctx.fill();
-    c.y+=c.d;
-  });
-}
-
-function startConfetti(){
-  confetti=[];
-  create();
-  let t=setInterval(draw,20);
-  setTimeout(()=>clearInterval(t),4000);
+  },3000);
 }
 </script>
 
